@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pricing Plans</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      padding: 24px;
+      display: grid;
+      place-items: center;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #eef4ff, #f8faff);
+      color: #172033;
+    }
+
+    .pricing-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 100%;
+      max-width: 1100px;
+    }
+
+    .pricing {
+      position: relative;
+      flex: 0 1 440px;
+      max-width: calc(100% - 32px);
+      margin: 16px;
+      padding: 40px 36px;
+      overflow: hidden;
+      border: 1px solid #e4eaf4;
+      border-radius: 24px;
+      background: #fff;
+      box-shadow: 0 18px 45px rgb(31 55 95 / 12%);
+      transition: transform 200ms ease, box-shadow 200ms ease;
+    }
+
+    .pricing::before {
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      height: 7px;
+      background: linear-gradient(90deg, #4776e6, #7b61ff);
+      content: "";
+    }
+
+    .pricing:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 55px rgb(31 55 95 / 18%);
+    }
+
+    .title {
+      margin: 0 0 12px;
+      font-size: 30px;
+    }
+
+    .price {
+      margin: 0 0 28px;
+      color: #16784b;
+      font-size: 38px;
+      font-weight: 700;
+    }
+
+    .features {
+      display: grid;
+      gap: 14px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .features li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid #edf0f5;
+      color: #465168;
+      font-size: 16px;
+    }
+
+    .features li::before {
+      color: #16784b;
+      font-weight: 700;
+      content: "✓";
+    }
+
+    .btn {
+      width: 100%;
+      margin-top: 28px;
+      padding: 16px 22px;
+      border: 0;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #4776e6, #6552d9);
+      box-shadow: 0 8px 18px rgb(71 118 230 / 25%);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 180ms ease, box-shadow 180ms ease,
+        background 180ms ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      background: linear-gradient(135deg, #315fc9, #5140c4);
+      box-shadow: 0 12px 24px rgb(71 118 230 / 35%);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    .btn:focus-visible {
+      outline: 3px solid #a9baff;
+      outline-offset: 4px;
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 16px;
+      }
+
+      .pricing {
+        padding: 32px 24px;
+      }
+
+      .title {
+        font-size: 26px;
+      }
+
+      .price {
+        font-size: 34px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main id="plans" class="pricing-grid" aria-label="Pricing plans"></main>
+
+  <script>
+    function Card(title, price, features) {
+      const card = document.createElement("article");
+      card.className = "pricing";
+
+      const heading = document.createElement("h2");
+      heading.className = "title";
+      heading.textContent = title;
+
+      const priceText = document.createElement("p");
+      priceText.className = "price";
+      priceText.textContent = price;
+
+      const featureList = document.createElement("ul");
+      featureList.className = "features";
+
+      features.forEach((feature) => {
+        const item = document.createElement("li");
+        item.textContent = feature;
+        featureList.append(item);
+      });
+
+      const button = document.createElement("button");
+      button.className = "btn";
+      button.type = "button";
+      button.textContent = "Start Trial";
+
+      card.append(heading, priceText, featureList, button);
+      return card;
+    }
+
+    document.querySelector("#plans").append(
+      Card("Basic Plan", "$9.99 /month", [
+        "1 GB Storage",
+        "Basic Support",
+        "All Core Features"
+      ])
+    );
+  </script>
+</body>
+</html>
